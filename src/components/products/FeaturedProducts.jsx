@@ -15,7 +15,7 @@ function FeaturedProducts() {
     getProducts()
       .then((data) => {
         const best = data.filter((p) => p.badge)
-        setProducts((best.length ? best : data).slice(0, 4))
+        setProducts((best.length >= 4 ? best : data).slice(0, 4))
       })
       .catch(() => setProducts([]))
       .finally(() => setLoading(false))
