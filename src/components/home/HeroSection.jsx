@@ -1,8 +1,9 @@
 import { useEffect, useState, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { api } from '../api'
 
-const banners = [
+const fallbackBanners = [
   {
     image: '/images/banner1.jpg',
     eyebrow: 'India\u2019s Premium Men\u2019s Wellness Brand',
@@ -15,7 +16,7 @@ const banners = [
     image: '/images/banner2.jpg',
     eyebrow: 'Clinically Dosed Capsules & Oils',
     title: 'Build real stamina, naturally.',
-    sub: 'Ashwagandha, Shilajit and more — backed by science and trusted by 1,00,000+ men.',
+    sub: 'Ashwagandha, Shilajit and more \u2014 backed by science and trusted by 1,00,000+ men.',
     cta: 'Explore Range',
     link: '#shop',
   },
@@ -33,9 +34,32 @@ const AUTOPLAY_MS = 5000
 
 function HeroSection() {
   const [index, setIndex] = useState(0)
+  const [banners, setBanners] = useState(fallbackBanners)
 
-  const next = useCallback(() => setIndex((i) => (i + 1) % banners.length), [])
-  const prev = useCallback(() => setIndex((i) => (i - 1 + banners.length) % banners.length), [])
+  useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const res = await fetch(`${api}/banners`)
+        if (res.ok) {
+          const data = await res.json()
+          if (data && data.length > 0) {
+            setBanners(data.map(b => ({
+              image: b.image || '/images/banner1.jpg',
+              eyebrow: b.eyebrow || '',
+              title: b.title || '',
+              sub: b.sub || '',
+              cta: b.cta || 'Shop Now',
+              link: b.link || '#shop',
+            })))
+          }
+        }
+      } catch {}
+    }
+    fetchBanners()
+  }, [])
+
+  const next = useCallback(() => setIndex((i) => (i + 1) % banners.length), [banners.length])
+  const prev = useCallback(() => setIndex((i) => (i - 1 + banners.length) % banners.length), [banners.length])
 
   useEffect(() => {
     const timer = setInterval(next, AUTOPLAY_MS)
@@ -45,7 +69,7 @@ function HeroSection() {
   const banner = banners[index]
 
   return (
-    <section id="home" className="relative h-[620px] overflow-hidden bg-ink sm:h-[680px]">
+    <section id="home" className="relative h-[480px] overflow-hidden bg-ink sm:h-[620px] lg:h-[680px]">
       <AnimatePresence>
         <motion.div
           key={index}
@@ -76,20 +100,20 @@ function HeroSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="max-w-2xl"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-extrabold uppercase tracking-widest text-white backdrop-blur">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-widest text-white backdrop-blur sm:gap-2 sm:px-4 sm:py-2 sm:text-xs">
               <span className="h-2 w-2 rounded-full bg-amber-400" />
               {banner.eyebrow}
             </span>
 
-            <h1 className="mt-6 text-5xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h1 className="mt-4 text-3xl font-extrabold leading-[1.05] tracking-tight text-white sm:mt-6 sm:text-5xl md:text-6xl lg:text-7xl">
               {banner.title}
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85">{banner.sub}</p>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/85 sm:mt-6 sm:text-base lg:text-lg">{banner.sub}</p>
 
             <a
               href={banner.link}
-              className="group mt-9 inline-flex items-center gap-2 rounded-full bg-amber-600 px-8 py-4 text-sm font-bold text-white shadow-xl shadow-amber-600/30 transition hover:bg-amber-500"
+              className="group mt-6 inline-flex items-center gap-2 rounded-full bg-amber-600 px-6 py-3 text-sm font-bold text-white shadow-xl shadow-amber-600/30 transition hover:bg-amber-500 sm:mt-9 sm:px-8 sm:py-4"
             >
               {banner.cta}
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -116,7 +140,7 @@ function HeroSection() {
       <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3">
         {banners.map((b, i) => (
           <button
-            key={b.image}
+            key={i}
             onClick={() => setIndex(i)}
             aria-label={`Go to banner ${i + 1}`}
             className={`h-2.5 rounded-full transition-all ${

@@ -1,6 +1,8 @@
 import { products as localProducts } from './data/products'
 
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+
+export const api = API
 const TOKEN_KEY = 'pb-token'
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
