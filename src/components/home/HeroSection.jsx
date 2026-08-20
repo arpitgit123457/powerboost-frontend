@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
-import { api } from '../api'
+import { api } from '../../api'
 
 const fallbackBanners = [
   {
