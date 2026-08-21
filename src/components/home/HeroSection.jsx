@@ -43,8 +43,9 @@ function HeroSection() {
         if (res.ok) {
           const data = await res.json()
           if (data && data.length > 0) {
+            const baseUrl = api.replace(/\/api$/, '')
             setBanners(data.map(b => ({
-              image: b.image || '/images/banner1.jpg',
+              image: b.image ? (b.image.startsWith('http') ? b.image : baseUrl + b.image) : '/images/banner1.jpg',
               eyebrow: b.eyebrow || '',
               title: b.title || '',
               sub: b.sub || '',

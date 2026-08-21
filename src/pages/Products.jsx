@@ -5,7 +5,7 @@ function Products() {
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-b from-surface to-white pb-6 pt-32 sm:pt-36">
-        <div className="pointer-events-none absolute -top-20 left-1/2 h-72 w-[600px] -translate-x-1/2 rounded-full bg-amber-200/40 blur-[120px]" />
+        <div className="pointer-events-none absolute -top-20 left-1/2 h-72 w-[350px] -translate-x-1/2 rounded-full bg-amber-200/40 blur-[120px] sm:w-[600px]" />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div

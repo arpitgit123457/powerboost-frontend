@@ -17,7 +17,7 @@ function QuickViewModal({ product, onClose }) {
       aria-label={`Quick view: ${product.name}`}
     >
       <div
-        className="grid w-full max-w-3xl overflow-hidden rounded-3xl bg-card shadow-lux md:grid-cols-2"
+        className="grid w-full max-w-3xl overflow-hidden rounded-3xl bg-card shadow-lux grid-cols-1 md:grid-cols-2"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative h-64 bg-surface md:h-auto">
@@ -33,7 +33,7 @@ function QuickViewModal({ product, onClose }) {
             </div>
           )}
         </div>
-        <div className="p-7">
+        <div className="p-5 sm:p-7">
           <div className="flex items-start justify-between">
             <span className="text-xs font-bold uppercase tracking-widest text-accent">
               {product.category}

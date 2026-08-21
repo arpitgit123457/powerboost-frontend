@@ -79,7 +79,7 @@ function About() {
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-b from-surface to-card pb-16 pt-32 sm:pt-36">
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-80 w-[700px] -translate-x-1/2 rounded-full bg-amber-200/40 blur-[130px]" />
+        <div className="pointer-events-none absolute -top-24 left-1/2 h-80 w-[350px] -translate-x-1/2 rounded-full bg-amber-200/40 blur-[130px] sm:w-[700px]" />
         <div className="pointer-events-none absolute -left-24 top-40 h-64 w-64 rounded-full bg-orange-200/30 blur-[100px]" />
         <div className="pointer-events-none absolute -right-24 top-24 h-64 w-64 rounded-full bg-yellow-100/40 blur-[100px]" />
 
@@ -104,14 +104,14 @@ function About() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   to="/products"
-                  className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-black uppercase tracking-wide text-white shadow-xl shadow-accent/25 transition hover:bg-accent-dark"
+                  className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-black uppercase tracking-wide text-white shadow-xl shadow-accent/25 transition hover:bg-accent-dark sm:px-8 sm:py-4"
                 >
                   Explore Our Products
                   <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-accent/30 px-8 py-4 text-sm font-bold text-accent transition hover:bg-accent hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-accent/30 px-6 py-3.5 text-sm font-bold text-accent transition hover:bg-accent hover:text-white sm:px-8 sm:py-4"
                 >
                   Free Consultation
                 </Link>
@@ -128,7 +128,7 @@ function About() {
                 <img
                   src="/images/leaves.jpg"
                   alt="Authentic Ayurvedic herbs"
-                  className="h-[420px] w-full rounded-[2rem] object-cover"
+                  className="h-[280px] w-full rounded-[2rem] object-cover sm:h-[360px] lg:h-[420px]"
                 />
                 <div className="absolute inset-3 rounded-[2rem] bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 p-7">
