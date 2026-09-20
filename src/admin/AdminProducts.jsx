@@ -53,13 +53,18 @@ function ProductForm({ initial, categories, onSubmit, onCancel, busy }) {
     e.preventDefault()
     const payload = new FormData()
     Object.entries(form).forEach(([key, value]) => {
+      if (key === 'image') return
       if (key === 'featured' || key === 'inStock') {
         payload.append(key, value ? 'true' : 'false')
       } else if (value !== undefined && value !== null) {
         payload.append(key, value)
       }
     })
-    if (file) payload.append('image', file)
+    if (file) {
+      payload.append('image', file)
+    } else if (form.image) {
+      payload.append('image', form.image)
+    }
     onSubmit(payload)
   }
 
