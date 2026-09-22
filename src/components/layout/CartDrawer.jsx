@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../../context/cartContext'
 import { productIcon, formatINR } from '../../utils'
+import { imageUrl } from '../../api'
 
 function CartDrawer() {
   const { items, isOpen, setIsOpen, updateQty, removeItem, subtotal, totalItems, clearCart } =
@@ -66,7 +67,7 @@ function CartDrawer() {
                     <div key={item._id} className="flex gap-4 rounded-2xl border border-line bg-surface p-3">
                       {item.image ? (
                         <img
-                          src={item.image}
+                          src={imageUrl(item.image)}
                           alt={item.name}
                           loading="lazy"
                           className="h-20 w-20 shrink-0 rounded-xl object-cover"

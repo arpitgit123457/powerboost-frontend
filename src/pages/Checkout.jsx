@@ -24,7 +24,7 @@ import {
 } from 'lucide-react'
 import { useCart } from '../context/cartContext'
 import { useAuth } from '../context/AuthContext'
-import { orderApi } from '../api'
+import { orderApi, imageUrl } from '../api'
 import { productIcon, formatINR } from '../utils'
 
 const inputCls =
@@ -129,7 +129,7 @@ function SummaryItem({ item }) {
     <div className="flex items-center gap-3">
       {item.image ? (
         <img
-          src={item.image}
+          src={imageUrl(item.image)}
           alt={item.name}
           loading="lazy"
           className="h-14 w-14 shrink-0 rounded-xl object-cover"

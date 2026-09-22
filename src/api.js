@@ -68,26 +68,42 @@ function cachedRequest(path, options = {}) {
 
 const fallbackDelay = () => delay(150)
 
+export const imageUrl = (src) => {
+  if (!src) return ''
+  if (/^https?:|^\/\//.test(src)) return src
+  if (src.startsWith('/api/')) return API.replace(/\/api$/, '') + src
+  return src
+}
+
+const hideProduct = (p) => p.category === 'Oil' || /oil/i.test(p.name || '')
+
+const withImages = (list) => list.map((p) => (p.image ? { ...p, image: imageUrl(p.image) } : p))
+
 export const getProducts = async (category) => {
   try {
     const params = category && category !== 'All Products' ? `?category=${encodeURIComponent(category)}` : ''
     const data = await cachedRequest(`/products${params}`)
-    return Array.isArray(data) && data.length > 0 ? data : localProducts
+    const list = Array.isArray(data) && data.length > 0 ? data : localProducts
+    return withImages(list.filter((p) => !hideProduct(p)))
   } catch {
     await fallbackDelay()
-    if (!category || category === 'All Products') return localProducts
-    return localProducts.filter((p) => p.category === category)
+    const source =
+      !category || category === 'All Products'
+        ? localProducts
+        : localProducts.filter((p) => p.category === category)
+    return withImages(source.filter((p) => !hideProduct(p)))
   }
 }
 
 export const getProduct = async (id) => {
   try {
     const data = await cachedRequest(`/products/${id}`)
-    if (data && data._id) return data
+    if (data && data._id) return data.image ? { ...data, image: imageUrl(data.image) } : data
     throw new Error('Not found')
   } catch {
     await fallbackDelay()
-    return localProducts.find((p) => p._id === id) ?? null
+    const found = localProducts.find((p) => p._id === id) ?? null
+    return found && found.image ? { ...found, image: imageUrl(found.image) } : found
   }
 }
 
