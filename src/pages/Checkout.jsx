@@ -17,6 +17,7 @@ import {
   ShieldCheck,
   Smartphone,
   Truck,
+  MessageCircle,
   User as UserIcon,
   Copy,
   Wallet,
@@ -45,6 +46,40 @@ function Field({ icon: Icon, label, ...props }) {
 
 const FREE_SHIPPING_OVER = 499
 const SHIPPING_FEE = 49
+
+const WHATSAPP_NUMBER = '918449446655'
+
+function buildWhatsAppText(order) {
+  const lines = [
+    '*NEW ORDER — Powerbooster*',
+    '',
+    `*Order ID:* ${order._id}`,
+    '',
+    '*Customer*',
+    `Name: ${order.customer?.name || '-'}`,
+    `Phone: ${order.customer?.phone || '-'}`,
+    `Email: ${order.customer?.email || '-'}`,
+    '',
+    '*Delivery address*',
+    order.address
+      ? `${order.address.line}, ${order.address.city}, ${order.address.state} - ${order.address.pincode}`
+      : '',
+    '',
+    '*Items*',
+    ...(order.items || []).map(
+      (it, i) => `${i + 1}. ${it.name} x ${it.qty} = ${formatINR(it.price * it.qty)}`
+    ),
+    '',
+    `Subtotal: ${formatINR(order.itemsPrice)}`,
+    `Shipping: ${order.shippingPrice === 0 ? 'FREE' : formatINR(order.shippingPrice)}`,
+    `*Total: ${formatINR(order.totalPrice)}*`,
+    `Payment: ${order.paymentMethod || 'COD'}`,
+  ]
+  return lines.join('\n')
+}
+
+const whatsappLink = (order) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppText(order))}`
 
 const payMethods = [
   {
@@ -181,6 +216,9 @@ function Checkout() {
       })
       setPlaced(order)
       clearCart()
+      try {
+        window.open(whatsappLink(order), '_blank', 'noopener')
+      } catch {}
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.')
@@ -247,6 +285,14 @@ function Checkout() {
               </div>
 
               <div className="flex flex-col gap-3 pt-2">
+                <a
+                  href={whatsappLink(placed)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-[#1fb959]"
+                >
+                  <MessageCircle className="h-4 w-4" /> Send order on WhatsApp
+                </a>
                 <Link
                   to="/track-order"
                   className="flex items-center justify-center gap-2 rounded-xl border-2 border-accent px-4 py-3.5 text-sm font-bold text-accent transition hover:bg-accent hover:text-white"

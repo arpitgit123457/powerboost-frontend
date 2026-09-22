@@ -5,20 +5,23 @@ import { getProducts } from '../../api'
 import ProductCard from './ProductCard'
 import QuickViewModal from './QuickViewModal'
 import FadeIn from '../ui/FadeIn'
+import { products as localProducts } from '../../data/products'
 
 function FeaturedProducts() {
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [products, setProducts] = useState(() => {
+    const best = localProducts.filter((p) => p.badge)
+    return (best.length >= 4 ? best : localProducts).slice(0, 4)
+  })
   const [quickView, setQuickView] = useState(null)
 
   useEffect(() => {
     getProducts()
       .then((data) => {
         const best = data.filter((p) => p.badge)
-        setProducts((best.length >= 4 ? best : data).slice(0, 4))
+        if (best.length >= 4) setProducts(best.slice(0, 4))
+        else if (data.length > 0) setProducts(data.slice(0, 4))
       })
-      .catch(() => setProducts([]))
-      .finally(() => setLoading(false))
+      .catch(() => {})
   }, [])
 
   return (
@@ -40,19 +43,11 @@ function FeaturedProducts() {
         </FadeIn>
       </div>
 
-      {loading ? (
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-96 animate-pulse rounded-3xl border border-line bg-surface" />
-          ))}
-        </div>
-      ) : (
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product._id} product={product} onQuickView={setQuickView} />
-          ))}
-        </div>
-      )}
+      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {products.map((product) => (
+          <ProductCard key={product._id} product={product} onQuickView={setQuickView} />
+        ))}
+      </div>
 
       <QuickViewModal product={quickView} onClose={() => setQuickView(null)} />
     </section>

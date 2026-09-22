@@ -42,12 +42,36 @@ async function request(path, options = {}) {
   return res.status === 204 ? null : res.json()
 }
 
+const CACHE_TTL = 2 * 60 * 1000
+const getCache = new Map()
+const inflight = new Map()
+
+function cachedRequest(path, options = {}) {
+  const isGet = !options.method || options.method === 'GET'
+  if (!isGet) return request(path, options)
+
+  const hit = getCache.get(path)
+  if (hit && Date.now() - hit.at < CACHE_TTL) return Promise.resolve(hit.data)
+
+  const pending = inflight.get(path)
+  if (pending) return pending
+
+  const p = request(path, options)
+    .then((data) => {
+      getCache.set(path, { at: Date.now(), data })
+      return data
+    })
+    .finally(() => inflight.delete(path))
+  inflight.set(path, p)
+  return p
+}
+
 const fallbackDelay = () => delay(150)
 
 export const getProducts = async (category) => {
   try {
     const params = category && category !== 'All Products' ? `?category=${encodeURIComponent(category)}` : ''
-    const data = await request(`/products${params}`)
+    const data = await cachedRequest(`/products${params}`)
     return Array.isArray(data) && data.length > 0 ? data : localProducts
   } catch {
     await fallbackDelay()
@@ -58,7 +82,7 @@ export const getProducts = async (category) => {
 
 export const getProduct = async (id) => {
   try {
-    const data = await request(`/products/${id}`)
+    const data = await cachedRequest(`/products/${id}`)
     if (data && data._id) return data
     throw new Error('Not found')
   } catch {
@@ -69,7 +93,7 @@ export const getProduct = async (id) => {
 
 export const getCategories = async () => {
   try {
-    const data = await request('/categories')
+    const data = await cachedRequest('/categories')
     if (Array.isArray(data) && data.length > 0) {
       return data.map((c) => c.name || c)
     }
@@ -82,7 +106,7 @@ export const getCategories = async () => {
 
 export const getHealth = async () => {
   try {
-    return await request('/health')
+    return await cachedRequest('/health')
   } catch {
     return { status: 'ok', offline: true }
   }

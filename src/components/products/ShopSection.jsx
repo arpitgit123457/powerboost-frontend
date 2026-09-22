@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { getProducts } from '../../api'
 import ProductCard from './ProductCard'
 import QuickViewModal from './QuickViewModal'
+import { products as localProducts } from '../../data/products'
 
 function CircleItem({ circle, active, onSelect }) {
   const isActive = active === circle.name
@@ -44,9 +45,8 @@ function CircleItem({ circle, active, onSelect }) {
 }
 
 function ShopSection() {
-  const [allProducts, setAllProducts] = useState([])
+  const [allProducts, setAllProducts] = useState(localProducts)
   const [active, setActive] = useState('All Products')
-  const [loading, setLoading] = useState(true)
   const [quickView, setQuickView] = useState(null)
   const trackRef = useRef(null)
   const [searchParams] = useSearchParams()
@@ -58,9 +58,8 @@ function ShopSection() {
 
   useEffect(() => {
     getProducts()
-      .then(setAllProducts)
-      .catch(() => setAllProducts([]))
-      .finally(() => setLoading(false))
+      .then((data) => setAllProducts(data.length > 0 ? data : localProducts))
+      .catch(() => {})
   }, [])
 
   const circles = useMemo(() => {
@@ -124,22 +123,14 @@ function ShopSection() {
         </button>
       </div>
 
-      {loading ? (
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="h-96 animate-pulse rounded-3xl border border-line bg-surface" />
-          ))}
-        </div>
+      {products.length === 0 ? (
+        <p className="mt-10 text-center text-mist">No products found.</p>
       ) : (
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => (
             <ProductCard key={product._id} product={product} onQuickView={setQuickView} />
           ))}
         </div>
-      )}
-
-      {!loading && products.length === 0 && (
-        <p className="mt-10 text-center text-mist">No products found.</p>
       )}
 
       <QuickViewModal product={quickView} onClose={() => setQuickView(null)} />
