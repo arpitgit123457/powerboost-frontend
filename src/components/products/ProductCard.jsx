@@ -15,7 +15,7 @@ function ProductCard({ product, onQuickView }) {
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-card shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lux">
-      <div className="relative h-48 overflow-hidden bg-surface">
+      <div className="relative h-40 overflow-hidden bg-surface">
         {product.image ? (
           <img
             src={product.image}

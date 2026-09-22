@@ -75,8 +75,6 @@ export const imageUrl = (src) => {
   return src
 }
 
-const hideProduct = (p) => p.category === 'Oil' || /oil/i.test(p.name || '')
-
 const withImages = (list) => list.map((p) => (p.image ? { ...p, image: imageUrl(p.image) } : p))
 
 export const getProducts = async (category) => {
@@ -84,14 +82,14 @@ export const getProducts = async (category) => {
     const params = category && category !== 'All Products' ? `?category=${encodeURIComponent(category)}` : ''
     const data = await cachedRequest(`/products${params}`)
     const list = Array.isArray(data) && data.length > 0 ? data : localProducts
-    return withImages(list.filter((p) => !hideProduct(p)))
+    return withImages(list)
   } catch {
     await fallbackDelay()
     const source =
       !category || category === 'All Products'
         ? localProducts
         : localProducts.filter((p) => p.category === category)
-    return withImages(source.filter((p) => !hideProduct(p)))
+    return withImages(source)
   }
 }
 
