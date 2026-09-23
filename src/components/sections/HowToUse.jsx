@@ -1,30 +1,33 @@
 import { Pill, Droplets, Check, Zap, HeartPulse, Flame } from 'lucide-react'
 import FadeIn from '../ui/FadeIn'
 
+const capImg = 'https://powerboost-backend.onrender.com/api/images/6a9fc9024131460ea969c980'
+const oilImg = 'https://powerboost-backend.onrender.com/api/images/6a9fc8ee4131460ea969c97e'
+
 const capsule = {
-  name: 'Amrit Urja Capsule',
+  name: 'Powerbooster Capsule',
   tagline: 'Andar ki towat — stamina, energy aur vitality ke liye',
-  image: '/images/product5.jpg',
+  image: capImg,
   icon: Pill,
   steps: [
-    'Rozana sirf 1 capsule lein',
+    'Rozana sirf 1 Powerbooster Capsule lein',
     'Kisi ek meal ke baad doodh ya paani ke saath',
-    'Lagaatar 45–60 din tak use karein — aisi result dikhta hai',
+    'Lagaatar 45–60 din tak use karein — isi se result dikhta hai',
     'Prescribed dose se zyada kabhi na lein',
   ],
   benefits: ['Stamina', 'Energy', 'Vitality'],
 }
 
 const oil = {
-  name: 'Amrit Urja Oil',
+  name: 'Powerbooster Oil',
   tagline: 'Bahari massage — strength, muscles aur relaxation ke liye',
-  image: '/images/product11.jpg',
+  image: oilImg,
   icon: Droplets,
   steps: [
-    'Thodi si oil apni haath ki hatheli par lein',
+    'Thodi si Powerbooster Oil apni haath ki hatheli par lein',
     'Jis body part ko jaroorat hai us par 10–15 minute gently massage karein',
     'Rozana ya kam se kam hafte mein 3 baar massage karein',
-    'Sirf external use ke liye — muha/njaar se bilkul na lein',
+    'Sirf external use ke liye — muha/naak se bilkul na lein',
   ],
   benefits: ['Muscle Strength', 'Relaxation', 'Stiffness Relief'],
 }
@@ -44,8 +47,9 @@ function HowToUse() {
             Power Booster kaise use karein? <span className="text-accent">Bas 2 aasan formulas</span>
           </h2>
           <p className="mt-4 max-w-2xl leading-relaxed text-mist">
-            Andar se capsule, bahar se oil — dono ko saath use karne par hi Power Booster ka full result milta hai.
-            In dono boxes ko follow karein aur lagaatar istemal karein.
+            Andar se Powerbooster Capsule, bahar se Powerbooster Oil — dono ko saath use karne par hi Power
+            Booster ka full result milta hai. Nature ka power, science ka proof. In dono formulas ko follow
+            karein aur lagaatar istemal karein.
           </p>
         </FadeIn>
 

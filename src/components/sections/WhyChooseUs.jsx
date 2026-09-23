@@ -1,21 +1,23 @@
 import { Star, Leaf, ShieldCheck, Award, Lock, BadgeCheck } from 'lucide-react'
 import FadeIn from '../ui/FadeIn'
 
+const oilImg = 'https://powerboost-backend.onrender.com/api/images/6a9fc8ee4131460ea969c97e'
+
 const points = [
   {
     icon: Leaf,
     title: '100% Natural Formulation',
-    desc: 'Amrit Urja Capsule aur Oil dono time-tested ayurvedic herbs se bane hain — bina kisi harsh chemicals ya side effects ke.',
+    desc: 'Powerbooster Capsule aur Powerbooster Oil dono time-tested ayurvedic herbs se bane hain — bina kisi harsh chemicals ya side effects ke. Nature ka power.',
   },
   {
     icon: ShieldCheck,
-    title: 'Original Amrit Urja Formula',
+    title: 'Original Powerbooster Formula',
     desc: 'Poori Power Booster range ek hi trusted formula par based hai jo strength, stamina aur everyday energy ke liye sadiyon se use hota aaya hai.',
   },
   {
     icon: Award,
     title: 'GMP Certified & Lab Tested',
-    desc: 'Har batch GMP-certified facility mein banta hai aur third-party labs se test hokar hi aapke paas pahunchta hai.',
+    desc: 'Har batch GMP-certified facility mein banta hai aur third-party labs se test hokar hi aapke paas pahunchta hai. Science ka proof.',
   },
   {
     icon: Lock,
@@ -41,8 +43,9 @@ function WhyChooseUs() {
               Nature ka power, <span className="text-accent">science ka proof</span>
             </h2>
             <p className="mt-4 max-w-xl leading-relaxed text-mist">
-              Amrit Urja Capsule aur Amrit Urja Oil — poori Power Booster range ek hi cheez ke liye bani hai:
-              aapki roj ki strength, stamina aur energy ko naturally wapas lana. Sirf original formula, sirf asli results.
+              Powerbooster Capsule aur Powerbooster Oil — poori Power Booster range ek hi cheez ke liye bani hai:
+              aapki roj ki strength, stamina aur energy ko naturally wapas lana. Nature ka power, science ka proof.
+              Sirf original formula, sirf asli results.
             </p>
 
             <ul className="mt-8 space-y-5">
@@ -67,8 +70,8 @@ function WhyChooseUs() {
               <div className="absolute inset-0 -rotate-3 rounded-[2.5rem] bg-gradient-to-br from-accent/30 via-transparent to-transparent blur-2xl" />
               <div className="relative overflow-hidden rounded-[2.5rem] border border-line bg-card p-6 shadow-lux">
                 <img
-                  src="/images/product5.jpg"
-                  alt="Amrit Urja Power Booster Capsule"
+                  src={oilImg}
+                  alt="Powerbooster Oil"
                   loading="lazy"
                   className="h-[420px] w-full rounded-[2rem] object-cover"
                 />
@@ -79,8 +82,8 @@ function WhyChooseUs() {
                 <div className="absolute inset-x-8 bottom-8 rounded-2xl border border-white/10 bg-stone-950/80 p-5 backdrop-blur-md">
                   <div className="flex items-center justify-between gap-4">
                     <div>
-                      <p className="text-lg font-bold text-white">Amrit Urja Capsule</p>
-                      <p className="mt-0.5 text-sm text-white/60">100% Natural · Formula verified</p>
+                      <p className="text-lg font-bold text-white">Powerbooster Oil</p>
+                      <p className="mt-0.5 text-sm text-white/60">Nature ka power · Science ka proof</p>
                     </div>
                     <div className="shrink-0 rounded-xl bg-accent px-3 py-2 text-center">
                       <p className="flex items-center gap-1 text-xs font-extrabold text-stone-900">
