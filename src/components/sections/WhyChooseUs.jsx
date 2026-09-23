@@ -7,7 +7,7 @@ const points = [
   {
     icon: Leaf,
     title: '100% Natural Formulation',
-    desc: 'Powerbooster Capsule aur Powerbooster Oil dono time-tested ayurvedic herbs se bane hain — bina kisi harsh chemicals ya side effects ke. Nature ka power.',
+    desc: 'Powerbooster Capsule time-tested ayurvedic herbs se bana hai — bina kisi harsh chemicals ya side effects ke. Nature ka power.',
   },
   {
     icon: ShieldCheck,
@@ -43,7 +43,7 @@ function WhyChooseUs() {
               Nature ka power, <span className="text-accent">science ka proof</span>
             </h2>
             <p className="mt-4 max-w-xl leading-relaxed text-mist">
-              Powerbooster Capsule aur Powerbooster Oil — poori Power Booster range ek hi cheez ke liye bani hai:
+              Powerbooster Capsule — poori Power Booster range ek hi cheez ke liye bani hai:
               aapki roj ki strength, stamina aur energy ko naturally wapas lana. Nature ka power, science ka proof.
               Sirf original formula, sirf asli results.
             </p>
@@ -71,7 +71,7 @@ function WhyChooseUs() {
               <div className="relative overflow-hidden rounded-[2.5rem] border border-line bg-card p-6 shadow-lux">
                 <img
                   src={oilImg}
-                  alt="Powerbooster Oil"
+                  alt="Powerbooster Capsule"
                   loading="lazy"
                   className="h-[420px] w-full rounded-[2rem] object-cover"
                 />
@@ -82,7 +82,7 @@ function WhyChooseUs() {
                 <div className="absolute inset-x-8 bottom-8 rounded-2xl border border-white/10 bg-stone-950/80 p-5 backdrop-blur-md">
                   <div className="flex items-center justify-between gap-4">
                     <div>
-                      <p className="text-lg font-bold text-white">Powerbooster Oil</p>
+                      <p className="text-lg font-bold text-white">Powerbooster Capsule</p>
                       <p className="mt-0.5 text-sm text-white/60">Nature ka power · Science ka proof</p>
                     </div>
                     <div className="shrink-0 rounded-xl bg-accent px-3 py-2 text-center">

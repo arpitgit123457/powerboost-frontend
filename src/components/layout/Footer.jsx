@@ -18,7 +18,7 @@ const columns = [
   },
   {
     title: 'Products',
-    links: ['Capsule', 'Oil', 'Churana', 'Shilajit'],
+    links: ['Capsule', 'Combo Pack', 'Churana', 'Shilajit'],
   },
   {
     title: 'Support',
@@ -75,8 +75,8 @@ function Footer() {
             </p>
             <p className="mt-4 flex items-center gap-2 text-sm text-mist">
               <Phone className="h-4 w-4 text-accent" />
-              <a href="tel:+919412870756" className="transition hover:text-accent">
-                +91 94128 70756
+              <a href="tel:+918449446655" className="transition hover:text-accent">
+                +91 84494 46655
               </a>
             </p>
             <div className="mt-6 flex gap-3">

@@ -13,7 +13,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Call Us',
-    value: '+91 94128 70756',
+    value: '+91 84494 46655',
     sub: '7 days a week',
     color: 'from-sky-500 to-indigo-400',
   },
@@ -36,8 +36,8 @@ const details = [
   {
     icon: Phone,
     label: 'Phone Number',
-    value: '+91 94128 70756',
-    href: 'tel:+919412870756',
+    value: '+91 84494 46655',
+    href: 'tel:+918449446655',
   },
   {
     icon: Clock,

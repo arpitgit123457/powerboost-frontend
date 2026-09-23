@@ -1,8 +1,8 @@
-import { Pill, Droplets, Check, Zap, HeartPulse, Flame } from 'lucide-react'
+import { Pill, Check, Zap, HeartPulse, Flame } from 'lucide-react'
 import FadeIn from '../ui/FadeIn'
 
-const capImg = 'https://powerboost-backend.onrender.com/api/images/6a9fc9024131460ea969c980'
-const oilImg = 'https://powerboost-backend.onrender.com/api/images/6a9fc8ee4131460ea969c97e'
+const capImg = 'https://powerboost-backend.onrender.com/api/images/6a9fc8ee4131460ea969c97e'
+const comboImg = 'https://powerboost-backend.onrender.com/api/images/6a9fc9024131460ea969c980'
 
 const capsule = {
   name: 'Powerbooster Capsule',
@@ -11,25 +11,25 @@ const capsule = {
   icon: Pill,
   steps: [
     'Rozana sirf 1 Powerbooster Capsule lein',
-    'Kisi ek meal ke baad doodh ya paani ke saath',
+    'Kisi ek meal ke baad paani ke saath',
     'Lagaatar 45–60 din tak use karein — isi se result dikhta hai',
     'Prescribed dose se zyada kabhi na lein',
   ],
   benefits: ['Stamina', 'Energy', 'Vitality'],
 }
 
-const oil = {
-  name: 'Powerbooster Oil',
-  tagline: 'Bahari massage — strength, muscles aur relaxation ke liye',
-  image: oilImg,
-  icon: Droplets,
+const combo = {
+  name: 'Powerbooster Combo Pack',
+  tagline: 'Complete wellness — capsule aur saath ke essentials ek order mein',
+  image: comboImg,
+  icon: Pill,
   steps: [
-    'Thodi si Powerbooster Oil apni haath ki hatheli par lein',
-    'Jis body part ko jaroorat hai us par 10–15 minute gently massage karein',
-    'Rozana ya kam se kam hafte mein 3 baar massage karein',
-    'Sirf external use ke liye — muha/naak se bilkul na lein',
+    'Combo Pack mein Powerbooster Capsule aur best-selling essentials ek saath milte hain',
+    'Rozana recommended dose ke according use karein',
+    'Har product ki packaging par diye gaye usage ko follow karein',
+    'Lagaatar use karein — Complete wellness routine ke liye',
   ],
-  benefits: ['Muscle Strength', 'Relaxation', 'Stiffness Relief'],
+  benefits: ['Complete Routine', 'Value Pack', 'Daily Wellness'],
 }
 
 function HowToUse() {
@@ -47,14 +47,14 @@ function HowToUse() {
             Power Booster kaise use karein? <span className="text-accent">Bas 2 aasan formulas</span>
           </h2>
           <p className="mt-4 max-w-2xl leading-relaxed text-mist">
-            Andar se Powerbooster Capsule, bahar se Powerbooster Oil — dono ko saath use karne par hi Power
-            Booster ka full result milta hai. Nature ka power, science ka proof. In dono formulas ko follow
+            Powerbooster Capsule se din ki shuruaat karein aur Powerbooster Combo Pack se apni poori
+            wellness routine ek saath manage karein. Nature ka power, science ka proof. In formulas ko follow
             karein aur lagaatar istemal karein.
           </p>
         </FadeIn>
 
         <div className="mt-14 grid gap-8 md:grid-cols-2">
-          {[capsule, oil].map((item, i) => (
+          {[capsule, combo].map((item, i) => (
             <FadeIn key={item.name} delay={0.1 * i}>
               <article className="group h-full overflow-hidden rounded-[2rem] border border-line bg-card transition duration-300 hover:-translate-y-2 hover:border-accent/30 hover:shadow-lux">
                 <div className="relative overflow-hidden">
@@ -67,7 +67,7 @@ function HowToUse() {
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                   <span className="absolute left-6 top-6 flex items-center gap-2 rounded-full bg-stone-950/70 px-4 py-2 text-sm font-bold text-accent backdrop-blur">
                     <item.icon className="h-4 w-4" />
-                    {i === 0 ? 'Internal Use' : 'External Use'}
+                    Daily Use
                   </span>
                 </div>
 

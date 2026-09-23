@@ -1,11 +1,11 @@
 export const products = [
   {
     _id: 'p1',
-    name: 'Powerbooster Oil',
-    slug: 'powerbooster-oil',
+    name: 'Powerbooster Capsule',
+    slug: 'powerbooster-capsule',
     tagline: 'Natural stamina & energy booster',
     description:
-      'Powerbooster Oil is a herbal powerhouse crafted to boost stamina, energy and overall vitality. Made from natural herbs, ideal for daily wellness.',
+      'Powerbooster Capsule is a herbal powerhouse crafted to boost stamina, energy and overall vitality. Made from natural herbs, ideal for daily wellness.',
     category: 'Bold Supplements',
     price: 1299,
     mrp: 1500,

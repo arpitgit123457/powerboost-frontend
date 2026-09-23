@@ -1,36 +1,36 @@
 export const articles = [
   {
-    id: 'powerbooster-oil',
+    id: 'powerbooster-capsule',
     category: 'Bold Supplements',
     date: 'Sep 20, 2026',
     readTime: '4 min read',
-    title: 'Powerbooster Oil: Your Natural Stamina & Energy Booster',
-    desc: 'Powerbooster Oil ek herbal powerhouse hai jo stamina, energy aur overall vitality ko support karta hai.',
+    title: 'Powerbooster Capsule: Your Natural Stamina & Energy Booster',
+    desc: 'Powerbooster Capsule ek herbal powerhouse hai jo stamina, energy aur overall vitality ko support karta hai.',
     body: `## Introduction
 
 Aaj ki busy lifestyle mein daily energy, stamina aur overall wellbeing ko maintain karna zaroori hai. Busy schedule, irregular routine aur proper rest ki kami ki wajah se hum aksar tired feel kar sakte hain.
 
-Powerbooster Oil ek herbal powerhouse hai, jo natural herbs se craft kiya gaya hai aur stamina, energy aur overall vitality ko support karne ke liye banaya gaya hai.
+Powerbooster Capsule ek herbal powerhouse hai, jo natural herbs se craft kiya gaya hai aur stamina, energy aur overall vitality ko support karne ke liye banaya gaya hai.
 
-## What Is Powerbooster Oil?
+## What Is Powerbooster Capsule?
 
-Powerbooster Oil ek Ayurvedic herbal massage oil hai, jo external use ke liye formulated hai. Isme natural herbs ka blend hota hai jo body ko relax karne aur everyday vitality ko support karne mein help karta hai.
+Powerbooster Capsule ek Ayurvedic herbal supplement hai, jo daily wellness ke liye formulated hai. Isme natural herbs ka blend hota hai jo body ko energise karne aur everyday vitality ko support karne mein help karta hai.
 
-Isi traditional Ayurvedic approach ko dhyan mein rakhte hue external massage ke liye ise use kiya ja sakta hai.
+Isi traditional Ayurvedic approach ko dhyan mein rakhte hue daily routine mein ise include kiya ja sakta hai.
 
 ## How to Use
 
-- Toh small amount of oil lein
-- Palms ke beech halka warm karein
-- Desired area par gentle, circular motions mein massage karein
-- 20–30 minutes ke liye chhod dein, phir warm water se rinse karein
-- Best results ke liye hafte mein 2–3 baar use karein
+- Roz 1 capsule lein
+- Glass paani ke saath, preferably khaane ke baad
+- Ek hi time par daily lena best hai
+- Consistent daily routine ke liye best results milte hain
+- Recommended dosage se zyada na lein
 
-Ye product external use ke liye hai. Recommended usage instructions ko carefully follow karein.
+Product ki recommended usage instructions ko carefully follow karein.
 
 ## Ayurvedic & Herbal Wellness
 
-Ayurveda mein herbs aur natural ingredients ko traditional wellness practices ka important part maana gaya hai. Powerbooster Oil ko bhi daily body-care aur relaxation routine ka part banaya ja sakta hai.
+Ayurveda mein herbs aur natural ingredients ko traditional wellness practices ka important part maana gaya hai. Powerbooster Capsule ko bhi daily wellness routine ka part banaya ja sakta hai.
 
 Ayurvedic approach sirf ek product par depend nahi karti, balki balanced diet, proper sleep, regular activity aur healthy daily routine ko bhi importance deti hai.
 
@@ -44,21 +44,21 @@ Better everyday wellness ke liye supplement ke saath basic healthy habits bhi im
 - Adequate hydration
 - Stress ko manage karna
 
-## Powerbooster Oil – Product Information
+## Powerbooster Capsule – Product Information
 
-- Product Name: Powerbooster Oil
-- Type: Ayurvedic Herbal Massage Oil
-- Usage: External use only
+- Product Name: Powerbooster Capsule
+- Type: Ayurvedic Herbal Supplement
+- Usage: Roz 1 capsule, paani ke saath
 
 Product ki complete usage aur instructions ke liye packaging par di gayi information ko follow karein.
 
 ## Important Precautions
 
-Ye product external use only ke liye hai. Eyes, mouth aur sensitive areas ke contact se bachayein. Irritation ya discomfort hone par use discontinue karein.
+Recommended dosage se zyada use na karein. Agar aap pregnant ya breastfeeding hain, kisi medical condition se affected hain, ya regular medicines le rahe hain, to use karne se pehle qualified healthcare professional se salah lein.
 
 ## Conclusion
 
-Powerbooster Oil traditional Ayurvedic herbal practices ko daily self-care routine ke saath include karne ka convenient option hai. Healthy lifestyle ke saath ise apni everyday wellness journey ka part banaya ja sakta hai.`,
+Powerbooster Capsule traditional Ayurvedic herbal practices ko daily wellness routine ke saath include karne ka convenient option hai. Healthy lifestyle ke saath ise apni everyday wellness journey ka part banaya ja sakta hai.`,
     image: 'https://powerboost-backend.onrender.com/api/images/6a9fc8ee4131460ea969c97e',
   },
   {

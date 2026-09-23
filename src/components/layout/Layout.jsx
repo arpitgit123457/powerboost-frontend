@@ -20,7 +20,7 @@ function Layout() {
       <CartDrawer />
       <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} onAdd={addItem} />
       <a
-        href="https://wa.me/919412870756"
+        href="https://wa.me/918449446655"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
