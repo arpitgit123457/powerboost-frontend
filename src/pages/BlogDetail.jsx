@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, Calendar, Clock } from 'lucide-react'
-import { blogApi } from '../api'
+import { blogApi, imageUrl } from '../api'
 import { articles as fallbackArticles } from '../data/articles'
 
 function renderBody(body) {
@@ -117,7 +117,7 @@ function BlogDetail() {
         <div className="mt-8 overflow-hidden rounded-[2rem] border border-line bg-card shadow-sm">
           <div className="relative h-72 overflow-hidden sm:h-80">
             <img
-              src={article.image}
+              src={imageUrl(article.image)}
               alt={article.title}
               className="h-full w-full object-cover"
             />

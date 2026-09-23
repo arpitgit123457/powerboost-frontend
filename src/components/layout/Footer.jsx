@@ -33,18 +33,22 @@ const columns = [
 const socials = [
   {
     label: 'Instagram',
+    url: 'https://www.instagram.com/power.booster24?stkn=YmdoazhjZHN3bW1h',
     path: 'M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.6a5.2 5.2 0 100 10.4 5.2 5.2 0 000-10.4zm0 8.6a3.4 3.4 0 110-6.8 3.4 3.4 0 010 6.8zm6.7-8.8a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z',
   },
   {
     label: 'Facebook',
+    url: 'https://www.facebook.com',
     path: 'M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.3-1.5 1.6-1.5h1.6V3.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H7.6V13h2.7v8h3.2z',
   },
   {
     label: 'YouTube',
+    url: 'https://www.youtube.com',
     path: 'M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 00-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 001.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 001.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z',
   },
   {
     label: 'X',
+    url: 'https://www.x.com',
     path: 'M17.8 4h3l-6.6 7.6L22 20h-6.1l-4.8-6.3L5.6 20h-3l7-8.1L2 4h6.3l4.3 5.7L17.8 4zm-1.1 14.4h1.7L7.4 5.5H5.6l11.1 12.9z',
   },
 ]
@@ -79,7 +83,9 @@ function Footer() {
               {socials.map((social) => (
                 <a
                   key={social.label}
-                  href="#contact"
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-card text-mist transition hover:border-accent/50 hover:text-accent"
                 >

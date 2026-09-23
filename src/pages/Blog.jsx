@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import FadeIn from '../components/ui/FadeIn'
-import { blogApi } from '../api'
+import { blogApi, imageUrl } from '../api'
 import { articles as fallbackArticles } from '../data/articles'
 
 function Blog() {
@@ -52,7 +52,7 @@ function Blog() {
               <article className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-[1.75rem] border border-line bg-card shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-lux">
                 <div className="relative h-56 overflow-hidden">
                   <img
-                    src={article.image}
+                    src={imageUrl(article.image)}
                     alt={article.title}
                     loading="lazy"
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-110"

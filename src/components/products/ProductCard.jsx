@@ -15,14 +15,14 @@ function ProductCard({ product, onQuickView }) {
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-card shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lux">
-      <div className="relative h-40 overflow-hidden bg-surface">
+      <div className="relative h-36 overflow-hidden bg-surface sm:h-40">
         {product.image ? (
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+            className="h-full w-full object-contain p-2 transition duration-500 group-hover:scale-105"
           />
         ) : (
           <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${product.gradient}`}>

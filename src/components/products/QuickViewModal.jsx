@@ -25,7 +25,7 @@ function QuickViewModal({ product, onClose }) {
             <img
               src={product.image}
               alt={product.name}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain p-3"
             />
           ) : (
             <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${product.gradient}`}>
