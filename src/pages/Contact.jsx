@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, Clock, Send, CheckCircle2, MapPin, MessageCircleHeart } from 'lucide-react'
+import { Mail, Phone, Clock, Send, CheckCircle2 } from 'lucide-react'
 
 const contactInfo = [
   {
@@ -43,12 +43,6 @@ const details = [
     icon: Clock,
     label: 'Support Hours',
     value: '24/7 — Live chat & email',
-    href: null,
-  },
-  {
-    icon: MapPin,
-    label: 'Head Office',
-    value: 'Shanti Nagar, Professor Colony, Kamla Nagar, Agra, Uttar Pradesh 282005',
     href: null,
   },
 ]
@@ -256,22 +250,6 @@ function Contact() {
                   </div>
                 )
               })}
-            </div>
-
-            <div className="mt-8 overflow-hidden rounded-3xl border border-line bg-card shadow-lux">
-              <iframe
-                title="Power Booster office location"
-                src="https://www.google.com/maps?q=Kamla+Nagar,+Agra,+Uttar+Pradesh&output=embed"
-                className="h-56 w-full"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-              <div className="flex items-center gap-3 border-t border-line p-5">
-                <MessageCircleHeart className="h-5 w-5 shrink-0 text-accent" />
-                <p className="text-sm text-mist">
-                  Drop by our Agra head office, or reach us online — we&apos;re happy to help.
-                </p>
-              </div>
             </div>
           </motion.div>
         </div>
