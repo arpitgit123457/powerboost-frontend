@@ -56,3 +56,7 @@ h3 {
     transform: translateX(-50%);
   }
 }
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}

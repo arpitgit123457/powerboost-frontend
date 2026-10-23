@@ -16,6 +16,7 @@ import { getProducts } from '../api'
 import { useCart } from '../context/cartContext'
 import { formatINR } from '../utils'
 import QuickViewModal from '../components/products/QuickViewModal'
+import ProductReviews from '../components/products/ProductReviews'
 import FadeIn from '../components/ui/FadeIn'
 
 function ProductPage() {
@@ -199,6 +200,8 @@ function ProductPage() {
             </div>
           </FadeIn>
         </div>
+
+        <ProductReviews product={product} />
       </div>
 
       <QuickViewModal product={quickView} onClose={() => setQuickView(null)} />

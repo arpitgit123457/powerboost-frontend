@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Trash2, Eye, ShoppingBag } from 'lucide-react'
+import { Trash2, Eye, ShoppingBag, Truck, RefreshCw, Send, PackageCheck } from 'lucide-react'
 import { adminApi } from '../api'
 import {
   Card,
@@ -23,7 +23,129 @@ const statusTone = {
   Cancelled: 'red',
 }
 
-function OrderDetail({ order, onClose }) {
+const SHIP_TONE = {
+  NotReady: 'slate',
+  Pending: 'amber',
+  Pushed: 'green',
+  Failed: 'red',
+  Cancelled: 'slate',
+}
+
+function ShippingPanel({ order, onRefresh }) {
+  const [busy, setBusy] = useState('')
+  const [note, setNote] = useState('')
+  const s = order.shipping || {}
+
+  const run = async (key, fn) => {
+    setBusy(key)
+    setNote('')
+    try {
+      await fn()
+      onRefresh()
+    } catch (err) {
+      setNote(err.message)
+    } finally {
+      setBusy('')
+    }
+  }
+
+  return (
+    <div className="border-t border-line pt-4">
+      <p className="mb-3 text-xs font-bold uppercase tracking-widest text-mist">Shipping</p>
+
+      <div className="flex flex-wrap items-center gap-2">
+        <Badge tone={SHIP_TONE[s.status] || 'slate'}>{s.status || 'NotReady'}</Badge>
+        {s.awb && <Badge tone="blue">AWB {s.awb}</Badge>}
+        {s.courierName && <Badge tone="slate">{s.courierName}</Badge>}
+      </div>
+
+      <div className="mt-3 grid gap-1.5 text-xs text-mist sm:grid-cols-2">
+        {s.shiprocketOrderId && (
+          <p>
+            SR order: <span className="font-semibold text-ink">{s.shiprocketOrderId}</span>
+          </p>
+        )}
+        {s.shipmentId && (
+          <p>
+            Shipment: <span className="font-semibold text-ink">{s.shipmentId}</span>
+          </p>
+        )}
+        {s.trackingStatus && (
+          <p>
+            Status: <span className="font-semibold text-ink">{s.trackingStatus}</span>
+          </p>
+        )}
+        {s.lastTrackedAt && (
+          <p>
+            Last synced:{' '}
+            <span className="font-semibold text-ink">
+              {new Date(s.lastTrackedAt).toLocaleString('en-IN')}
+            </span>
+          </p>
+        )}
+      </div>
+
+      {s.error && <p className="mt-3 rounded-lg bg-red-50 p-2 text-xs font-semibold text-red-600">{s.error}</p>}
+      {note && <p className="mt-3 rounded-lg bg-amber-50 p-2 text-xs font-semibold text-amber-700">{note}</p>}
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        {!s.shiprocketOrderId ? (
+          <Btn variant="primary" disabled={Boolean(busy)} onClick={() => run('push', () => adminApi.pushToShiprocket(order._id))}>
+            <Send className="h-4 w-4" />
+            {busy === 'push' ? 'Pushing...' : 'Push to Shiprocket'}
+          </Btn>
+        ) : (
+          <>
+            {!s.awb && (
+              <Btn
+                variant="primary"
+                disabled={Boolean(busy)}
+                onClick={() => run('courier', () => adminApi.assignCourier(order._id))}
+              >
+                <Truck className="h-4 w-4" />
+                {busy === 'courier' ? 'Assigning...' : 'Assign Courier'}
+              </Btn>
+            )}
+            <Btn
+              variant="outline"
+              disabled={Boolean(busy)}
+              onClick={() => run('sync', () => adminApi.syncTracking(order._id))}
+            >
+              <RefreshCw className={`h-4 w-4 ${busy === 'sync' ? 'animate-spin' : ''}`} />
+              {busy === 'sync' ? 'Syncing...' : 'Sync Tracking'}
+            </Btn>
+          </>
+        )}
+        {s.trackingUrl && (
+          <a
+            href={s.trackingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-2.5 text-sm font-bold text-ink transition hover:border-accent hover:text-accent"
+          >
+            <PackageCheck className="h-4 w-4" />
+            Track
+          </a>
+        )}
+      </div>
+
+      {s.scans?.length > 0 && (
+        <div className="mt-4 max-h-56 space-y-2 overflow-y-auto rounded-xl bg-surface p-3">
+          {[...s.scans].reverse().map((scan, i) => (
+            <div key={i} className="border-l-2 border-accent/40 pl-3 text-xs">
+              <p className="font-bold text-ink">{scan.activity}</p>
+              <p className="text-mist">
+                {scan.location} {scan.date && `- ${scan.date}`}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function OrderDetail({ order, onClose, onRefresh }) {
   if (!order) return null
   return (
     <Modal open onClose={onClose} title={`Order #${order._id}`}>
@@ -85,6 +207,8 @@ function OrderDetail({ order, onClose }) {
             </Badge>
           </div>
         </div>
+
+        <ShippingPanel order={order} onRefresh={onRefresh} />
       </div>
     </Modal>
   )
@@ -98,6 +222,7 @@ function AdminOrders() {
   const [detail, setDetail] = useState(null)
   const [confirm, setConfirm] = useState(null)
   const [busy, setBusy] = useState(false)
+  const [shippingConfig, setShippingConfig] = useState(null)
 
   const load = async () => {
     setLoading(true)
@@ -114,6 +239,13 @@ function AdminOrders() {
 
   useEffect(() => {
     load()
+  }, [])
+
+  useEffect(() => {
+    adminApi
+      .getShippingConfig()
+      .then(setShippingConfig)
+      .catch(() => setShippingConfig(null))
   }, [])
 
   const filtered = statusFilter === 'All' ? orders : orders.filter((o) => o.status === statusFilter)
@@ -163,6 +295,23 @@ function AdminOrders() {
         </Card>
       )}
 
+      {shippingConfig && !shippingConfig.configured && (
+        <Card className="mb-6 border-amber-200 bg-amber-50">
+          <p className="text-sm font-semibold text-amber-700">
+            Shiprocket is not configured yet — orders will stay unshipped. Missing:{' '}
+            <span className="font-bold">{shippingConfig.missing.join(', ')}</span>
+          </p>
+        </Card>
+      )}
+
+      {shippingConfig?.connection?.error && (
+        <Card className="mb-6 border-red-200 bg-red-50">
+          <p className="text-sm font-semibold text-red-600">
+            Shiprocket connection failed: {shippingConfig.connection.error}
+          </p>
+        </Card>
+      )}
+
       <Card className="overflow-hidden p-0">
         {loading ? (
           <div className="space-y-3 p-6">
@@ -184,6 +333,7 @@ function AdminOrders() {
                   <Th>Items</Th>
                   <Th>Total</Th>
                   <Th>Payment</Th>
+                  <Th>Shipping</Th>
                   <Th>Status</Th>
                   <Th className="text-right">Actions</Th>
                 </tr>
@@ -218,6 +368,16 @@ function AdminOrders() {
                       <Badge tone={order.paymentMethod === 'COD' ? 'amber' : 'green'}>
                         {order.paymentMethod}
                       </Badge>
+                    </Td>
+                    <Td>
+                      <div className="flex flex-col gap-1">
+                        <Badge tone={SHIP_TONE[order.shipping?.status] || 'slate'}>
+                          {order.shipping?.status || 'NotReady'}
+                        </Badge>
+                        {order.shipping?.awb && (
+                          <span className="text-[11px] font-semibold text-mist">AWB {order.shipping.awb}</span>
+                        )}
+                      </div>
                     </Td>
                     <Td>
                       <select
@@ -260,7 +420,7 @@ function AdminOrders() {
         )}
       </Card>
 
-      <OrderDetail order={detail} onClose={() => setDetail(null)} />
+      <OrderDetail order={detail} onClose={() => setDetail(null)} onRefresh={load} />
 
       <Modal open={Boolean(confirm)} title="Delete Order" onClose={() => setConfirm(null)}>
         <div className="space-y-5">

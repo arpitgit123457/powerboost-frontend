@@ -1,5 +1,7 @@
 import HeroSection from '../components/home/HeroSection'
 import FeaturedProducts from '../components/products/FeaturedProducts'
+import VideosSection from '../components/sections/VideosSection'
+import SliderSection from '../components/sections/SliderSection'
 import CategoryGrid from '../components/sections/CategoryGrid'
 import Stats from '../components/sections/Stats'
 import Marquee from '../components/sections/Marquee'
@@ -18,6 +20,8 @@ function Home() {
       <Stats />
       <Marquee />
       <FeaturedProducts />
+      <VideosSection />
+      <SliderSection />
       <CategoryGrid />
       <WhyChooseUs />
       <GenuineCheck />
